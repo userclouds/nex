@@ -827,7 +827,7 @@ func NewLexerWithInit(in io.Reader, initFun func(*Lexer)) *Lexer {
         mark[st] = true
         // As we're at the start of input, follow all ^ transitions and append to our list of start states.
         st = family[i].startf[st]
-        if -1 == st || mark[st] { break }
+        if st == -1 || mark[st] { break }
         // We only check for a match after at least one transition.
         checkAccept(i, st)
       }
@@ -849,7 +849,7 @@ func NewLexerWithInit(in io.Reader, initFun func(*Lexer)) *Lexer {
         var nextState [][2]int
         for _, x := range state {
           x[1] = family[x[0]].f[x[1]](r)
-          if -1 == x[1] { continue }
+          if x[1] == -1 { continue }
           nextState = append(nextState, x)
           checkAccept(x[0], x[1])
         }
@@ -861,7 +861,7 @@ dollar:  // Handle $.
           for {
             mark[x[1]] = true
             x[1] = family[x[0]].endf[x[1]]
-            if -1 == x[1] || mark[x[1]] { break }
+            if x[1] == -1 || mark[x[1]] { break }
             if checkAccept(x[0], x[1]) {
               // Unlike before, we can break off the search. Now that we're at the end, there's no need to maintain the state of each DFA.
               break dollar
