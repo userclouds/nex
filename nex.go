@@ -771,6 +771,8 @@ type frame struct {
   s string
   line, column int
 }
+
+// Lexer is a generated lexer.
 type Lexer struct {
   // The lexer runs in its own goroutine, and communicates via channel 'ch'.
   ch chan frame
@@ -933,10 +935,12 @@ var dfas = []dfa{`
 
 var lexeroutro = `}
 
+// NewLexer creates a new default Lexer.
 func NewLexer(in io.Reader) *Lexer {
   return NewLexerWithInit(in, nil)
 }
 
+// Stop stops the lexer.
 func (yylex *Lexer) Stop() {
   yylex.chStop <- true
 }
