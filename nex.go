@@ -937,8 +937,8 @@ func NewLexer(in io.Reader) *Lexer {
   return NewLexerWithInit(in, nil)
 }
 
-func (yyLex *Lexer) Stop() {
-  yyLex.chStop <- true
+func (yylex *Lexer) Stop() {
+  yylex.chStop <- true
 }
 
 // Text returns the matched text.
