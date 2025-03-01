@@ -784,11 +784,6 @@ type Lexer struct {
   stack []frame
   stale bool
 
-  // The 'l' and 'c' fields were added for
-  // https://github.com/wagerlabs/docker/blob/65694e801a7b80930961d70c69cba9f2465459be/buildfile.nex
-  // Since then, I introduced the built-in Line() and Column() functions.
-  l, c int
-
   // The following line makes it easy for scripts to insert fields in the
   // generated code.
   // [NEX_END_OF_LEXER_STRUCT]
