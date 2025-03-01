@@ -34,6 +34,8 @@ func init() {
 }
 
 func dieErr(t *testing.T, err error, s string) {
+	t.Helper()
+
 	if err != nil {
 		t.Fatalf("%s: %s", s, err)
 	}
@@ -47,6 +49,8 @@ func TestNexPlusYacc(t *testing.T) {
 		dieErr(t, os.RemoveAll(tmpdir), "RemoveAll")
 	}()
 	run := func(s string) {
+		t.Helper()
+
 		v := strings.Split(s, " ")
 		err := exec.Command(v[0], v[1:]...).Run()
 		dieErr(t, err, s)
